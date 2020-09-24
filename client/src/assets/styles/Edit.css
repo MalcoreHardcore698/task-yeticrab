@@ -1,0 +1,6 @@
+.edit {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 15px;
+    min-width: 450px;
+}
