@@ -1,35 +1,12 @@
+/* Variables */
+:root {
+  --main-offset: 15px;
+  --main-background:  #f5f5f5;
+}
+
+/* Tags */
 body {
-  background: #f5f5f5;
-}
-
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
+  background: var(--main-background);
 }
 
 main {
@@ -52,19 +29,52 @@ a {
   text-decoration: none;
 }
 
+/* App */
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+/* Custom */
 .table-manage {
   display: flex;
-  grid-gap: 15px;
+  grid-gap: var(--main-offset);
   justify-content: flex-end;
-  margin-block-end: 15px;
+  margin-block-end: var(--main-offset);
 }
 
 .modal-content {
   outline: none !important;
   background: white;
-  padding: 15px;
+  padding: var(--main-offset);
   border-radius: 3px;
-  box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
+  box-shadow: 0 2px 1px -1px rgba(0,0,0,0.2), 0 1px 1px 0 rgba(0,0,0,0.14), 0 1px 3px 0 rgba(0,0,0,0.12);
+}
+
+/* @ rules */
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
 }
 
 @keyframes App-logo-spin {
@@ -79,7 +89,7 @@ a {
 @media only screen and (max-width: 480px) {
   main {
     width: calc(100% - 30px);
-    padding: 15px;
+    padding: var(--main-offset);
   }
 
   .table-manage {

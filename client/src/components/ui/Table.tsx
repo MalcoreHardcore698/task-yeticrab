@@ -21,8 +21,7 @@ import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
 import VisibilityIcon from '@material-ui/icons/Visibility'
 import Alert from './Alert'
-import Add from './Add'
-import Edit from './Edit'
+import Form from './Form'
 import {
   Post,
   Posts,
@@ -106,7 +105,7 @@ const Manage = ({
         startIcon={<EditIcon />}
         onClick={() => {
           handleOpen()
-          if (post) handleModalContent(<Edit
+          if (post) handleModalContent(<Form
               post={post}
               handleSelect={setSelected}
               handleClose={handleClose}
@@ -121,7 +120,7 @@ const Manage = ({
         startIcon={<AddIcon />}
         onClick={() => {
           handleOpen()
-          handleModalContent(<Add
+          handleModalContent(<Form
               handleSelect={setSelected}
               handleClose={handleClose}
             />)

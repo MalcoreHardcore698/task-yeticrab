@@ -5,11 +5,12 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import InputMask from 'react-input-mask'
 import { useForm } from 'react-hook-form'
-import { addPost } from '../../redux/actions'
+import { addPost, editPost } from '../../redux/actions'
 import { Post } from '../../utils/interfaces'
-import '../../assets/styles/Add.css'
+import '../../assets/styles/Form.css'
 
-export default ({ handleSelect, handleClose }: {
+export default ({ post, handleSelect, handleClose }: {
+    post?: Post,
     handleSelect: any,
     handleClose: any
 }) => {
@@ -17,8 +18,9 @@ export default ({ handleSelect, handleClose }: {
     const { register, handleSubmit, errors } = useForm()
 
     const onSubmit = (data: any) => {
-        const post: Post = {
-            _id: 'secret',
+        const action = (post) ? editPost : addPost
+        const document: Post = {
+            _id: post?._id || 'secret',
             trackId: data.trackId,
             companyName: data.companyName,
             carrierName: data.carrierName,
@@ -26,14 +28,14 @@ export default ({ handleSelect, handleClose }: {
             comments: data.comments,
             code: data.code
         }
-        dispatch(addPost(post))
+
+        dispatch(action(document))
         handleSelect([])
         handleClose()
     }
 
     return (
         <form
-            className="add"
             autoComplete="off"
             onSubmit={handleSubmit(onSubmit)}
         >
@@ -61,6 +63,7 @@ export default ({ handleSelect, handleClose }: {
                 inputRef={register({
                     required: 'Track ID is require'
                 })}
+                defaultValue={post?.trackId || ''}
                 name="trackId"
                 id="track-id"
                 label="Track ID"
@@ -69,6 +72,7 @@ export default ({ handleSelect, handleClose }: {
                 inputRef={register({
                     required: 'Company Name is require'
                 })}
+                defaultValue={post?.companyName || ''}
                 name="companyName"
                 id="company-name"
                 label="Company Name"
@@ -77,6 +81,7 @@ export default ({ handleSelect, handleClose }: {
                 inputRef={register({
                     required: 'Carrier Name is require'
                 })}
+                defaultValue={post?.carrierName || ''}
                 name="carrierName"
                 id="carrier-name"
                 label="Carrier Name"
@@ -84,6 +89,7 @@ export default ({ handleSelect, handleClose }: {
             
                 <InputMask
                     id="carrier-phone"
+                    defaultValue={post?.carrierPhone || ''}
                     mask="+(9) 999 999 99 99"
                     maskChar=" "
                 >
@@ -99,6 +105,7 @@ export default ({ handleSelect, handleClose }: {
                 inputRef={register({
                     required: 'Comments is require'
                 })}
+                defaultValue={post?.comments || ''}
                 name="comments"
                 id="comments"
                 label="Comments"
@@ -111,6 +118,7 @@ export default ({ handleSelect, handleClose }: {
                 inputRef={register({
                     required: 'Code ATI is require'
                 })}
+                defaultValue={post?.code || ''}
                 name="code"
                 id="code"
                 label="Code ATI"
@@ -121,7 +129,7 @@ export default ({ handleSelect, handleClose }: {
                 variant="contained"
                 color="primary"
             >
-                Add
+                {(post) ? 'Save Changes' : 'Add'}
             </Button>
         </form>
     )
