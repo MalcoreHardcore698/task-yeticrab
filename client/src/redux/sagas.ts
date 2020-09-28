@@ -15,7 +15,7 @@ export function* fetchPostsAsync() {
   try {
     yield put(requestPosts());
     const data = yield call(() => {
-      return fetch(`${host}/api/list`)
+      return fetch(`${host}/api`)
         .then(res => res.json())
       }
     )
@@ -31,7 +31,7 @@ export function* fetchAddPostAsync(action: any) {
   try {
     yield put(requestAddPost());
     const data = yield call(async () => {
-      return await fetch(`${host}/api/add`, {
+      return await fetch(`${host}/api`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(post)
@@ -52,8 +52,8 @@ export function* fetchEditPostAsync(action: any) {
   try {
     yield put(requestEditPost());
     const data = yield call(async () => {
-      return await fetch(`${host}/api/edit/${post._id}`, {
-            method: 'POST',
+      return await fetch(`${host}/api/${post._id}`, {
+            method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(post)
           })
@@ -73,8 +73,8 @@ export function* fetchDeletePostsAsync(action: any) {
   try {
     yield put(requestDeletePosts());
     const data = yield call(async () => {
-      return await fetch(`${host}/api/delete`, {
-            method: 'POST',
+      return await fetch(`${host}/api`, {
+            method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(ids)
           })
